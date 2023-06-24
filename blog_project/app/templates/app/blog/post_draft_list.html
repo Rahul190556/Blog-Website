@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+{% extends "app/blog/base.html" %}
+{% block content %}
+{% for post in posts %} <!-- Use object_list instead of posts -->
+<!-- The variable object_list is the default context variable provided by the ListView in Django. It contains the list of -->
+<!-- objects retrieved from the queryset. -->
+<div class="post">
+    <p class="date">Created:{{ post.created_date|date:'d-m-Y'}}</p>
+    <h1><a href="{% url 'app:post_detail' pk=post.pk %}">{{post.title}}</a></h1>
+    <p>{{post.text|truncatechars:200}}</p>
+    <p>Comment: {{ post.comments.count }}</p> <!-- Display the count of comments -->
+</div>
+{% endfor %}
+{% endblock %}
